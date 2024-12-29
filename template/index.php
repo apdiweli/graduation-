@@ -52,6 +52,8 @@
                     <div class="input-group mb-4">
                         <input type="password" name="pass" id="pass" class="form-control" placeholder="password">
                     </div>
+
+                    
                     <div class="form-group text-left">
                         <div class="checkbox checkbox-fill d-inline">
                             <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">

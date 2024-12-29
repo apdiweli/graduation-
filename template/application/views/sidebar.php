@@ -34,8 +34,9 @@
                     // Check if the user role is 'admin'
                     if (isset($_SESSION['Role']) && $_SESSION['Role'] === 'admin') {
                     ?>
-                            <li class=""><a href="application/views/form.php" class="get_form">Project Registration</a></li>
+                           
                             <li class=""><a href="application/views/project_report.php" class="get">View and manage project</a></li>
+                            <li class=""><a href="application/views/manage_projects.php" class="gt_submit">Projects applied</a></li>
                             <?php
                     } // End role check
                     ?>
@@ -91,7 +92,7 @@
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">User Managment</span></a>
                         <ul class="pcoded-submenu">
-                            <li class=""><a href="application/views/user.php" class="yuu">Student Registartion</a></li>
+                            <li class=""><a href="application/views/user.php" class="yuu">User Registartion</a></li>
                             <li class=""><a href="application/views/supervisor.php" class="super">Supervisor Registartion</a></li>
                             
                            

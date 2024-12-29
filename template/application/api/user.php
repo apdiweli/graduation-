@@ -41,8 +41,8 @@ function register_user($conn){
         // $query = "INSERT INTO `users`(`id`, `user_name`,`password`,`Image`)
         //  VALUES('$new_id','$username',MD5('$password'), '$save_name')";
            
-        $query = "INSERT INTO `users`(`id`,`username`, `Role`, `password`, `email`, `image`) 
-         VALUES ('$new_id','$username','student',MD5('$passward'),'$Email','$save_name')";
+        $query = "INSERT INTO `users`(`id`,`student_id`,`username`, `Role`, `password`, `email`, `image`) 
+         VALUES ('$new_id','$Student_id','$username','student',MD5('$passward'),'$Email','$save_name')";
         // Excecution
     
         $result = $conn->query($query);
@@ -64,6 +64,27 @@ function register_user($conn){
     echo json_encode($data);
 
 }
+
+function student_registration($conn) {
+    extract($_POST);
+    $data = array();
+
+    // Build the query and call the procedure
+    $query = "CALL student_reg ('$fname','$Faculty','$Department','$address')";
+
+    // Execute
+    if ($conn->query($query)) {
+        $data = array("status" => true, "data" => "Registered successfully");
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+   
+    echo json_encode($data);
+}
+
+
+
 
 function readAlluser($conn){
 
@@ -133,6 +154,8 @@ function generate($conn){
 
 
 
+
+
 if(isset($_POST['action'])){
     $action=$_POST['action'];
     $action($conn);
@@ -144,3 +167,4 @@ if(isset($_POST['action'])){
 
 
 ?>
+

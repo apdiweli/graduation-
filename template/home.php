@@ -64,7 +64,7 @@ if (!isset($_SESSION['Role'])) {
 
 
     <!-- Required Js -->
-<script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/js/vendor-all.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/pcoded.min.js"></script>
 
@@ -75,6 +75,10 @@ if (!isset($_SESSION['Role'])) {
     <script src="application/js/user.js"></script>
     <script src="application/js/supervisor.js"></script>
     <script src="application/js/Student.js"></script>
+    <script src="application/js/notification.js"></script>
+    <script src="application/js/Counter _notification.js"></script>
+    <script src="application/js/response.js"></script>
+    <script src="application/js/accept.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -36,7 +36,7 @@ $(".get").click(function(e){
                 let th='';
                 let tr ='';
 
-                console.log(status);
+                
     
                 if(status){
                     reponse.forEach(item => {

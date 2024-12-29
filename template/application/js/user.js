@@ -29,6 +29,10 @@ $(".yuu").click(function(e){
                 $("#user_model").modal("show");
             })
 
+            $("#Addstudent").on("click",function(){
+                $("#student_registration").modal("show");
+            })
+
             // alert(44);
 
             $("#user_form").on("submit",function(e){
@@ -56,8 +60,9 @@ $(".yuu").click(function(e){
                             let reponse = data.data;
                             if(status){
                                 displayMessege("success",reponse);
-                                $("user_form")[0].reset();
-                                // loadData();
+                                $("#user_model").modal("hide");
+                                $("#user_form")[0].reset();
+                                loadData();
                                 
                             }
                             else{
@@ -75,6 +80,50 @@ $(".yuu").click(function(e){
                     })
 
             })
+
+
+
+
+            $(document).ready(function () {
+                $("#student_form").on("submit", function (e) {
+                    e.preventDefault();
+            
+                    let form_data = new FormData($("#student_form")[0]);
+                    form_data.append("action", "student_registration");
+            
+                    $.ajax({
+                        method: "POST",
+                        url: "application/api/user.php",
+                        data: form_data,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                             // Parse JSON response
+                            let status = data.status;
+                            let reponse = data.data;
+            
+                            if (status) {
+                                displayMessege("success", reponse);
+                                $("#student_form")[0].reset();
+                                // loadData();
+                                setTimeout(() => {
+                                    $("#student_registration").modal("hide");
+                                }, 2000)
+                            } else {
+                                displayMessege("error", reponse);
+                            }
+                        },
+                        error: function () {
+                            displayMessege("error", "An error occurred while submitting the form.");
+                        },
+                    });
+                });
+            });
+            
+
+
+
+
 
 
             function loadData(){
@@ -150,6 +199,19 @@ $(".yuu").click(function(e){
             
             }
 
+            function displayMessege(type, message) {
+                // Select the correct alert box based on type
+                let alertBox = type === "success" ? ".alert-success" : ".alert-danger";
+            
+                // Update the alert box text and make it visible
+                $(alertBox).text(message).removeClass("d-none");
+            
+                // Automatically hide the alert after 3 seconds
+                setTimeout(() => {
+                    $(alertBox).addClass("d-none");
+                }, 4000);
+            }
+            
 
 
 

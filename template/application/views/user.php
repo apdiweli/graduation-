@@ -16,14 +16,8 @@
                                         </div>
                                         <div class="card-block table-border-style">
 
-                                            <div class="col-12">
-                                                                <div class="alert alert-success d-none" role="alert">
-                                                                A simple success alert—check it out!
-                                                                </div>
-                                                                <div class="alert alert-danger d-none" role="alert">
-                                                                A simple danger alert—check it out!
-                                                                </div>
-                                                </div>
+                                           
+                                            <button class="btn btn-secondary float-left" id="Addstudent">student Registration</button>
                                             <button class="btn btn-primary float-right" id="AddNew">Add New User</button>
                                             <div class="table-responsive">
                                                 <table class="table table-hover" id="userTable">
@@ -60,6 +54,11 @@
                                                                 <label for="">username</label>
                                                                 <input type="text" name="username" id="username" class="form-control">
                                                             </div>
+
+                                                            <div class="form-group">
+                                                                <label for="">Student_id</label>
+                                                                <input type="text" name="Student_id" id="Student_id" class="form-control">
+                                                            </div>
                                                         
                                                             <div class="form-group">
                                                                 <label for="">passward</label>
@@ -84,7 +83,7 @@
                                                                         <img src="" alt="" id="show">
                                                                         </div>
 
-                                                                    </div>
+                                                                 </div>
                                                                 
                                                             
                                                             </div>
@@ -104,7 +103,75 @@
                                             </div>
                                             </div>
                                         </div>
+
+
+
+
+                                        <div class="modal" tabindex="-1" id="student_registration">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Student  Registration</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" id="student_form">
+                                                       <div class="row">
+                                                        <div class="col-12">
+                                                        <div class="alert alert-success d-none" role="alert">
+                                                        A simple success alert—check it out!
+                                                        </div>
+                                                        <div class="alert alert-danger d-none" role="alert">
+                                                        A simple danger alert—check it out!
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="">Name</label>
+                                                                <input type="text" name="fname" id="fname" class="form-control">
+                                                            </div>
+                                                        
+                                                            <div class="form-group">
+                                                                <label for="">Faculty</label>
+                                                                <input type="text" name="Faculty" id="Faculty" class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="">Department</label>
+                                                                <input type="text" name="Department" id="Department" class="form-control">
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <label for="">address</label>
+                                                                <input type="text" name="address" id="address" class="form-control">
+                                                            </div>
+
+                                                            
+
+                                                            
+
+                                                            
+
+                                                            
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                         </div>
+                                                    </form>
+                                                </div>
+                                                
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                        </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+                                

@@ -9,7 +9,10 @@ function readAllproject($conn){
     $data=array();
     $array_data=array();
 
-    $sql="select `Project_Title` ,`department`, `Year`,`language_used` from projects where Action_used='completed'  ";
+    $sql="SELECT  p.Project_Title as 'Project Title' ,s.faculty as 'Faculties',p.Year,p.language_used as 'Language Build' from projects p
+INNER JOIN users u
+ON p.user_id =u.student_id INNER JOIN student s on s.id=u.student_id where p.status='approved'
+ ";
 
     $result=$conn->query($sql);
 
@@ -41,11 +44,19 @@ function searchProjectByTitle($conn) {
         return;
     }
 
-    $sql = "SELECT `Project_Title`, `department`, `Year`, `language_used` 
-            FROM projects 
-            WHERE `Project_Title` = ? AND `Action_used` = 'completed'";
+    $sql = "SELECT p.Project_Title, s.faculty, p.Year, p.language_used
+        FROM projects p
+        INNER JOIN users u ON p.user_id = u.student_id
+        INNER JOIN student s ON s.id = u.student_id
+        WHERE p.status = 'approved' AND p.Project_Title = ?";
+
 
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(array("status" => false, "data" => "SQL preparation failed: " . $conn->error));
+        return;
+    }
+
     $stmt->bind_param("s", $title);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -66,6 +77,7 @@ function searchProjectByTitle($conn) {
 
     echo json_encode($data);
 }
+
 
 
 
