@@ -92,6 +92,147 @@ function readAlluser($conn){
 }
 
 
+function supervisor_registered($conn) {
+    extract($_POST);
+    $data = array();
+
+    // Build the query and call the procedure
+    $query = "INSERT INTO `supervisors`(`full_name`, `degree_information`, `experience`) VALUES ('$full','$degree','$experience')";
+
+    // Execute
+    $result = $conn->query($query);
+
+    if ($result) {
+        
+            $data = array("status" => true, "data" => "Registration successful");
+        }
+     else {
+        // Fetch and store the connection error
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    echo json_encode($data);
+}
+
+
+// function readAlluser($conn){
+
+//     $data=array();
+//     $array_data=array();
+
+//     $sql="SELECT `username`, `email`, `image`, `status` from users where Role='supervisor'";
+
+//     $result=$conn->query($sql);
+
+//     if($result){
+
+//         while($row= $result->fetch_assoc()){
+//             $array_data [] =$row;
+
+//         }
+//         $data=array("status"=>true , "data"=>$array_data);
+
+//     }
+//     else{
+//         $data=array("status"=>false , "data"=>$conn->error);
+//     }
+    
+//     echo  json_encode($data);
+
+// }
+
+
+function readAllsupervisor($conn){
+
+    $data=array();
+    $array_data=array();
+
+    $sql="SELECT `id`,`full_name` as 'Teacher Name', `degree_information` as 'Background Info', `experience` as 'Experience'  FROM `supervisors` WHERE 1";
+
+    $result=$conn->query($sql);
+
+    if($result){
+
+        while($row= $result->fetch_assoc()){
+            $array_data [] =$row;
+
+        }
+        $data=array("status"=>true , "data"=>$array_data);
+
+    }
+    else{
+        $data=array("status"=>false , "data"=>$conn->error);
+    }
+    
+    echo  json_encode($data);
+
+}
+
+
+function deleteStudent($conn){
+    $data = array();
+    $id = $_POST['id'];
+    $query = "DELETE FROM supervisors WHERE id='$id'";
+    $res = $conn->query($query);
+
+    if($res){
+        $data = array("status" => true, "data" => "Deleted successfully");
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    // Correctly encode and return $data
+    echo json_encode($data);
+}
+
+
+function read_userNFO($conn) {
+    extract($_POST);
+    $data = array();
+
+    // Select only the necessary fields
+    $sql = "SELECT `id`,`full_name`, `degree_information`, `experience` FROM `supervisors` WHERE id = '$id'";
+
+    $result = $conn->query($sql);
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $data = array("status" => true, "data" => $row);
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    echo json_encode($data);
+}
+
+
+function updateStudent($conn){
+    $student_id=$_POST['student_id'];
+    $fullname=$_POST['full'];
+    $degree_info=$_POST['degree'];
+    $experience=$_POST['experience'];
+  
+    $data=array();
+    $messge=array();
+  
+    $sql="UPDATE `supervisors` SET `full_name`='$fullname',`degree_information`='$degree_info',`experience`='$experience' where id='$student_id'";
+  
+    $result=$conn->query($sql);
+     
+    if($result){
+        $data=array("status" => true, "data" =>"update successfully");
+        
+  
+    }
+    else{
+        $data=array("status" => false , "data" =>$conn->error);
+    }
+  
+    echo json_encode($data);
+  
+}
+
+
 
 function generate($conn){
     $new_id ='';
@@ -129,6 +270,7 @@ function generate($conn){
     return $new_id;
 
 }
+
 
 
 

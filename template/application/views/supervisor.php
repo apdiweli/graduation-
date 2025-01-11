@@ -16,18 +16,11 @@
                                         </div>
                                         <div class="card-block table-border-style">
 
-                                            <div class="col-12">
-                                                                <div class="alert alert-success d-none" role="alert">
-                                                                A simple success alert—check it out!
-                                                                </div>
-                                                                <div class="alert alert-danger d-none" role="alert">
-                                                                A simple danger alert—check it out!
-                                                                </div>
-                                                </div>
+                                         
                                             <button class="btn btn-primary float-right" id="AddNew">Add New Supervisor</button>
                                             <div class="table-responsive">
-                                                <table class="table table-hover" id="userTable">
-                                                    <thead  class=" bg-success  text-white" >
+                                                <table class="table table-hover" id="supervisorTable">
+                                                    <thead  class=" theme-bg  text-white" >
                                                     <tr>
                                                         
                                                        </tr> 
@@ -41,53 +34,44 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Leader Registration</h5>
+                                                    <h5 class="modal-title">Teacher Registration</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" id="user_form">
+                                                    <form method="post" id="supervisor_form">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                        <div class="alert alert-success d-none" role="alert">
-                                                        A simple success alert—check it out!
-                                                        </div>
-                                                        <div class="alert alert-danger d-none" role="alert">
-                                                        A simple danger alert—check it out!
-                                                        </div>
+                                                            <div class="alert alert-success d-none" role="alert">
+                                                            A simple success alert—check it out!
+                                                            </div>
+                                                            <div class="alert alert-danger d-none" role="alert">
+                                                            A simple danger alert—check it out!
+                                                            </div>
                                                         </div>
                                                         <div class="col-12">
+                                                          <div class="form-group">
+                                                                
+                                                                <input type="hidden" name="student_id" id="student_id" class="form-control">
+                                                            </div>
                                                             <div class="form-group">
-                                                                <label for="">username</label>
-                                                                <input type="text" name="username" id="username" class="form-control">
+                                                                <label for="">full_name</label>
+                                                                <input type="text" name="full" id="full" class="form-control">
                                                             </div>
                                                         
                                                             <div class="form-group">
-                                                                <label for="">passward</label>
-                                                                <input type="password" name="passward" id="passward" class="form-control">
+                                                                <label for="">degree_information</label>
+                                                                <input type="degree" name="degree" id="degree" class="form-control">
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">Email</label>
-                                                                <input type="email" name="Email" id="Email" class="form-control">
+                                                                <label for="">experience</label>
+                                                                <input type="text" name="experience" id="experience" class="form-control">
                                                             </div>
 
 
-                                                            <div class="form-group">
-                                                                <label for="">file</label>
-                                                                <input type="file" name="image" id="image" class="form-control">
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-4"> </div>
-                                                                <div class="col-sm-4"> 
-                                                                        <div class="form-group justify-content-center">
-                                                                        <img src="" alt="" id="show">
-                                                                        </div>
-
-                                                                    </div>
-                                                                
                                                             
-                                                            </div>
+
+                                       
 
                                                             
                                                         </div>

@@ -148,7 +148,7 @@ if (!$supervisors) {
                                                                                                     <input type="text" name="Requirement" id="Requirement" class="form-control">
                                                                                                 </div>
 
-                                                                                                 <input type="" name="project_id" id="accept_project_id">
+                                                                                                 <input type="hidden" name="project_id" id="accept_project_id">
 
 
                                                                                     
@@ -228,7 +228,7 @@ if (!$supervisors) {
 
 <script>
 
-    alert(888);
+    
     $(".accept-btn").on("click", function () {
 
                 const projectId = $(this).data("id");

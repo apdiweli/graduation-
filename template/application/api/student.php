@@ -10,9 +10,9 @@ function readAllproject($conn){
     $array_data=array();
 
     $sql="SELECT  p.Project_Title as 'Project Title' ,s.faculty as 'Faculties',p.Year,p.language_used as 'Language Build' from projects p
-INNER JOIN users u
-ON p.user_id =u.student_id INNER JOIN student s on s.id=u.student_id where p.status='approved'
- ";
+    INNER JOIN users u
+    ON p.user_id =u.student_id INNER JOIN student s on s.id=u.student_id where p.status='approved'
+    ";
 
     $result=$conn->query($sql);
 

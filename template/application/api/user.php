@@ -42,7 +42,7 @@ function register_user($conn){
         //  VALUES('$new_id','$username',MD5('$password'), '$save_name')";
            
         $query = "INSERT INTO `users`(`id`,`student_id`,`username`, `Role`, `password`, `email`, `image`) 
-         VALUES ('$new_id','$Student_id','$username','student',MD5('$passward'),'$Email','$save_name')";
+         VALUES ('$new_id','$Student_id','$username','student',MD5('$password'),'$Email','$save_name')";
         // Excecution
     
         $result = $conn->query($query);
@@ -91,7 +91,7 @@ function readAlluser($conn){
     $data=array();
     $array_data=array();
 
-    $sql="SELECT `username`, `email`, `image`, `status` from users where Role='student'";
+    $sql="SELECT `id`,`username`, `email`, `image`, `status` from users where Role='student'";
 
     $result=$conn->query($sql);
 
@@ -111,6 +111,170 @@ function readAlluser($conn){
     echo  json_encode($data);
 
 }
+
+
+function deleteStudent($conn){
+    $data = array();
+    $id = $_POST['id'];
+    $query = "DELETE FROM users WHERE id='$id'";
+    $res = $conn->query($query);
+
+    if($res){
+        $data = array("status" => true, "data" => "Deleted successfully");
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    // Correctly encode and return $data
+    echo json_encode($data);
+}
+
+
+
+function read_userNFO($conn) {
+    extract($_POST);
+    $data = array();
+
+    // Select only the necessary fields
+    $sql = "SELECT username, student_id, email, image FROM `users` WHERE id = '$id'";
+
+    $result = $conn->query($sql);
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $data = array("status" => true, "data" => $row);
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    echo json_encode($data);
+}
+
+
+function update_user($conn){
+    
+    extract($_POST);
+
+    $data = array();
+
+    if(!empty($_FILES['image']['tmp_name'])){
+        $error_arrray = array();
+
+    
+        $file_name = $_FILES['image']['name'];
+        $file_type = $_FILES['image']['type'];
+        $file_size = $_FILES['image']['size']; 
+    
+        $save_name = $id . ".png"; 
+    
+
+    
+        $allowedImages = ["image/jpg","image/jpeg","image/png"];
+        $max_size = 15 * 1024 * 1024;
+    
+       if(in_array($file_type,$allowedImages)){
+    
+            if($file_size > $max_size){
+                
+                $error_arrray[] = $file_size/1024/1024 . " MB Files Size must be Less Then " . $max_size/1024/1024 . " MB";
+            }
+       }else{
+            $error_arrray[] = "This file is not Allowed " .$file_type ;
+       }
+    
+    
+        // buliding the query and cAll the stored procedures
+        if(count($error_arrray) <= 0){
+             
+    
+            $query = "UPDATE `users` SET `student_id`='$student_id',`username`='$username',`Role`='$Role',`password`='$password',
+            `email`='$email',`image`='$save_name' WHERE  id = $id";
+    
+          
+        
+            $result = $conn->query($query);
+        
+        
+            if($result){
+        
+                move_uploaded_file($_FILES['image']['tmp_name'], "./upload/".$save_name);
+                $data = array("status" => true, "data" => "SucessFully Update");
+        
+            }else{
+                $data = array("status" => false, "data" => $conn->error);
+            }
+    
+        }else{
+            $data = array("status" => false, "data" => $error_arrray);
+        }
+    }
+    else{
+       
+        
+
+        $query  = "UPDATE `users` SET `student_id`='$student_id',`username`='$username',`Role`='$Role',`password`='$password',
+            `email`='$email' WHERE  id = '$id'";
+    
+        // Excecution
+    
+        $result = $conn->query($query);
+    
+      
+        if($result){
+    
+          
+            $data = array("status" => true, "data" => "SucessFully Updated");
+    
+        }else{
+            $data = array("status" => false, "data" => $conn->error);
+        }
+
+    }
+    
+   
+    echo json_encode($data);
+
+}
+    
+
+
+
+
+
+
+
+  // function resetPassword($conn, $userId) {
+//     $newPassword = "12345"; // Default reset password
+//     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+//     $sql = "UPDATE users SET password = ? WHERE id = ?";
+//     $stmt = $conn->prepare($sql);
+
+//     if ($stmt) {
+//         $stmt->bind_param("si", $hashedPassword, $userId);
+//         if ($stmt->execute()) {
+//             $data = array(
+//                 "status" => true,
+//                 "message" => "Password reset successfully",
+//                 "new_password" => $newPassword // Include the new password
+//             );
+//         } else {
+//             $data = array(
+//                 "status" => false,
+//                 "message" => $stmt->error
+//             );
+//         }
+//         $stmt->close();
+//     } else {
+//         $data = array(
+//             "status" => false,
+//             "message" => $conn->error
+//         );
+//     }
+
+//     echo json_encode($data);
+// }
+
+
 
 
 
@@ -156,6 +320,7 @@ function generate($conn){
 
 
 
+
 if(isset($_POST['action'])){
     $action=$_POST['action'];
     $action($conn);
@@ -166,5 +331,14 @@ if(isset($_POST['action'])){
 
 
 
+
+
+//  if ($_POST['action'] == 'resetPassword') {
+//     error_log("Received ID: " . $_POST['id']); // Log the received ID
+//     $userId = $_POST['id'];
+//     resetPassword($conn, $userId);
+// }
+
 ?>
+
 

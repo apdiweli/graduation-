@@ -92,10 +92,10 @@ function readAllprojects($conn){
     $data=array();
     $array_data=array();
 
-    $sql="SELECT  p.Project_Title ,s.faculty,p.Year,p.language_used,p.storing_file from projects p
-INNER JOIN users u
-ON p.user_id =u.student_id INNER JOIN student s on s.id=u.student_id where p.status='approved'
-  ";
+        $sql="SELECT  p.id,p.Project_Title ,s.faculty,p.Year,p.language_used as 'Language Build' from projects p
+    INNER JOIN users u
+    ON p.user_id =u.student_id INNER JOIN student s on s.id=u.student_id where p.status='approved'
+    ";
 
     $result=$conn->query($sql);
 
@@ -116,7 +116,41 @@ ON p.user_id =u.student_id INNER JOIN student s on s.id=u.student_id where p.sta
 
 }
 
+function deleteStudent($conn){
+    $data = array();
+    $id = $_POST['id'];
+    $query = "DELETE FROM project WHERE id='$id'";
+    $res = $conn->query($query);
 
+    if($res){
+        $data = array("status" => true, "data" => "Deleted successfully");
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    // Correctly encode and return $data
+    echo json_encode($data);
+}
+
+
+function read_userNFO($conn) {
+    extract($_POST);
+    $data = array();
+
+    // Select only the necessary fields
+    $sql = "SELECT `id`,`full_name`, `degree_information`, `experience` FROM `supervisors` WHERE id = '$id'";
+
+    $result = $conn->query($sql);
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $data = array("status" => true, "data" => $row);
+    } else {
+        $data = array("status" => false, "data" => $conn->error);
+    }
+
+    echo json_encode($data);
+}
 
 
 

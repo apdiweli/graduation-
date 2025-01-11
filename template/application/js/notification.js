@@ -15,7 +15,7 @@ $(document).ready(function () {
                             <li class="notification">
                                 <div class="media">
                                     <div class="media-body">
-                                        <p><strong>${notification.message}</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>${time}</span></p>
+                                        <p><a href="application/views/user_profile.php"  class="notify_appliedd"><strong>${notification.message}</strong> </a><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>${time}</span></p>
                                     </div>
                                 </div>
                             </li>

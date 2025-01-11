@@ -36,7 +36,8 @@ if (!isset($_SESSION['Role'])) {
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"> -->
     
 
 </head>
@@ -79,8 +80,15 @@ if (!isset($_SESSION['Role'])) {
     <script src="application/js/Counter _notification.js"></script>
     <script src="application/js/response.js"></script>
     <script src="application/js/accept.js"></script>
+    <script src="application/js/project_y_applied.js"></script>
+    <script src="application/js/new_student.js"></script>
+    <script src="application/js/profile.js"></script>
+    <script src="application/js/notify_applied.js"></script>
+    <script src="application/js/admin_users.js"></script>
+ 
 
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 </body>
 </html>

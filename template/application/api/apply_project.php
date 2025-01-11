@@ -50,7 +50,7 @@ try {
     // Inserting into admin_notifications table
     $notification_query = "INSERT INTO admin_notifications (message, created_at, is_read, project_id) 
                            VALUES (?, NOW(), FALSE, ?)";
-    $notification_message = "New project application submitted by $leader_name";
+    $notification_message = "New project $project_title submitted by $leader_name";
     $notification_stmt = $conn->prepare($notification_query);
 
     if (!$notification_stmt) {
@@ -77,19 +77,6 @@ try {
     echo json_encode(array("status" => false, "data" => $e->getMessage()));
     exit; // Prevent further execution
 }
-
-
-
-
-
-
-
-
-
-
-        
-
-
     
         if (!$notification_stmt) {
             echo json_encode(array("status" => false, "data" => "Notification SQL Error: " . $conn->error));
@@ -107,8 +94,21 @@ try {
     
 
 
+    
+    
+    
 
-if(isset($_POST['action'])){
+
+
+
+
+
+
+
+
+
+
+    if(isset($_POST['action'])){
     $action=$_POST['action'];
     $action($conn);
 }

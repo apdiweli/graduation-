@@ -15,7 +15,7 @@
                         <label>Navigation</label>
                     </li>
                     <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item active">
-                        <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                        <a href="home.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                     </li>
                     <li class="nav-item pcoded-menu-caption">
                         <label>UI Element</label>
@@ -41,6 +41,15 @@
                     } // End role check
                     ?>
 
+
+
+
+
+
+
+
+                    
+
 <?php
                     // Start the session
                     // session_start();
@@ -48,7 +57,8 @@
                     // Check if the role is either 'student' or 'supervisor'
                 if (isset($_SESSION['Role']) && ($_SESSION['Role'] === 'student' || $_SESSION['Role'] === 'supervisor')) {
                     ?>
-                        <li class=""><a href="application/views/student.php" class="get_student">Project Taken</a></li>
+                        <li class=""><a href="application/views/apply_project.php" class="get_student">Project Taken</a></li>
+                        <li class=""><a href="application/views/project_your_have applied.php" class="get_applied">Project applied</a></li>
                     <?php
                     } // End role check
                     ?>
@@ -59,7 +69,7 @@
 
                      
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
-                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">supervisor</span></a>
+                        <!-- <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">supervisor</span></a> -->
                         <ul class="pcoded-submenu">
                         <?php
                     // Start the session
@@ -68,16 +78,33 @@
                     // Check if the user role is 'admin'
                     if (isset($_SESSION['Role']) && $_SESSION['Role'] === 'admin') {
                     ?>
-                            <li class=""><a href="bc_button.html" class="">supervisor Registratiion</a></li>
+                            <!-- <li class=""><a href="bc_button.html" class="">supervisor Registratiion</a></li>
                             <li class=""><a href="bc_badges.html" class="">View and manage supervisor</a></li>
-                            <li class=""><a href="bc_breadcrumb-pagination.html" class="">View Submission</a></li>
+                            <li class=""><a href="bc_breadcrumb-pagination.html" class="">View Submission</a></li> -->
                             
                             <?php
                     } // End role check
                     ?>    
                         </ul>
                     </li>
+                    <?php
 
+                    if (isset($_SESSION['Role']) && $_SESSION['Role'] ==='admin') {
+                    ?>
+
+                    <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Academy</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="application/views/student.php" class="std">Student</a></li>
+                            <li class=""><a href="application/views/supervisor.php" id="supervisor_page">supervisor</a></li>
+                            
+                           
+                        </ul>
+                    </li>
+
+                    <?php
+                    } // End role check
+                    ?>
 
 
 
@@ -92,8 +119,8 @@
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">User Managment</span></a>
                         <ul class="pcoded-submenu">
-                            <li class=""><a href="application/views/user.php" class="yuu">User Registartion</a></li>
-                            <li class=""><a href="application/views/supervisor.php" class="super">Supervisor Registartion</a></li>
+                            <li class=""><a href="application/views/user.php" class="yuu">Users</a></li>
+                            <li class=""><a href="application/views/admin_users.php" class="super">Reset Password</a></li>
                             
                            
                         </ul>

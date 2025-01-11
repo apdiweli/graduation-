@@ -8,7 +8,7 @@ $(".get").click(function(e){
     $(".form-place").html(ress);
 
     loadData();
-    //  console.log("Requesting URL:", url);
+   
 
 
     function loadData(){
@@ -42,10 +42,9 @@ $(".get").click(function(e){
                     reponse.forEach(item => {
                         th = "<tr>";
                         for (let i in item) {
-                            // Skip the 'storing_file' column in the table header
-                            if (i !== 'storing_file') {
+                           
                                 th += `<th> ${i} </th>`;
-                            }
+                            
                         }
                         th += "<th>Action</th>";
                         th += "</tr>";
@@ -53,41 +52,26 @@ $(".get").click(function(e){
                         tr += "<tr>";
                         for (let i in item) {
                             // Skip the 'storing_file' column in the table row
-                            if (i !== 'storing_file') {
+                           
                                 tr += `<td> ${item[i]} </td>`;
-                            }
+                            
                         }
                     
                         // Add download button (hides raw file path)
-                        if (item['storing_file']) {
+                       
                             tr += `
                                 <td>
-                                    <a href="${item['storing_file']}" class="btn btn-primary" download>
-                                        <i class="fas fa-download"></i>
-                                    </a>
+                                    
                                     &nbsp; &nbsp;
-                                    <a class="btn btn-info update_info" update_id="${item['id']}">
+                                    <a class="label theme-bg2 text-white f-12 update_info" update_id="${item['id']}">
                                         <i class="fas fa-edit" style="color:#fff"></i>
                                     </a>
                                     &nbsp; &nbsp;
-                                    <a class="btn btn-danger delete_info" delete_id="${item['id']}">
+                                    <a class="label theme-bg text-white f-12  delete_info" delete_id="${item['id']}">
                                         <i class="fas fa-trash" style="color:#fff"></i>
                                     </a>
                                 </td>`;
-                        } else {
-                            tr += `
-                                <td>
-                                    No file available
-                                    &nbsp; &nbsp;
-                                    <a class="btn btn-info update_info" update_id="${item['id']}">
-                                        <i class="fas fa-edit" style="color:#fff"></i>
-                                    </a>
-                                    &nbsp; &nbsp;
-                                    <a class="btn btn-danger delete_info" delete_id="${item['id']}">
-                                        <i class="fas fa-trash" style="color:#fff"></i>
-                                    </a>
-                                </td>`;
-                        }
+                      
                     
                         tr += "</tr>";
                     });
@@ -110,7 +94,96 @@ $(".get").click(function(e){
         })
     
     }
-            
+        
+    function fetch_user(id) {
+        let sendingData = {
+            action: "read_userNFO",
+            id: id
+        };
+    
+        $.ajax({
+            method: "POST",
+            dataType: "JSON",
+            url: "application/api/project.php",
+            data: sendingData,
+            success: function(response) {
+                if (response.status) {
+                    let data = response.data;
+    
+                    btnaction = "Update";
+                    // Populate the modal fields with fetched data
+                    $("#student_id").val(data.id);
+                    $("#full").val(data.full_name);
+                    $("#degree").val(data.degree_information);
+                    $("#experience").val(data.experience);
+    
+    
+                    
+                    $("#user_model").modal("show");
+                } else {
+                    console.log("Error: ", response.data);
+                }
+            },
+            error: function() {
+                console.log("Failed to fetch data");
+            }
+        });
+    }
+
+    function deletestudent(id) {
+        let sendDate = {
+            "action": "deleteStudent",
+            "id": id
+        };
+    
+        // AJAX request to delete student
+        $.ajax({
+            type: "POST",
+            url: "application/api/project.php",
+            dataType: "JSON",
+            data: sendDate,
+            success: function(data) {
+                let status = data.status;
+                let response = data.data;
+    
+                if (status) {
+                    swal("Good job!", response, "success");
+                    console.log("Successful deletion");
+                    loadData(); // Reload table data
+                } else {
+                    swal("Error", response, "error");
+                    console.log("Failed to delete data: " + response);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("AJAX error:", status, error);
+                console.log(xhr.responseText); // Log server response for debugging
+            }
+        });
+    }
+
+
+
+    $("#projectTable").on("click", "a.update_info", function(event) {
+        event.preventDefault();  // Prevent default link behavior
+        let id = $(this).attr("update_id");  // Get the ID of the student to update
+       
+        fetch_user(id);  // Fetch the student's information
+    });
+
+
+
+    
+    $("#projectTable").on("click", "a.delete_info", function(event) {
+        event.preventDefault();  
+    
+        let id = $(this).attr("delete_id");
+        alert(id); 
+
+        if (confirm("Are you sure you want to delete?")) {
+            deletestudent(id); 
+        }
+    });
     
     
 
@@ -140,6 +213,9 @@ $(".get").click(function(e){
         }
     
     }
+
+
+
 
 
     
